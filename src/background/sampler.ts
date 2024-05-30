@@ -5,7 +5,6 @@ import { WebRequest } from "webextension-polyfill";
 
 @injectable()
 export class RandomSampler implements ISampler {
-  private windowSize: number = 512;
   private window: WebRequest.OnBeforeSendHeadersDetailsType[] = [];
 
   constructor(
@@ -15,7 +14,7 @@ export class RandomSampler implements ISampler {
 
   addTracker(X: WebRequest.OnBeforeSendHeadersDetailsType): void {
     this.window.push(X);
-    while (this.window.length > this.windowSize) {
+    while (this.window.length > this.settings.windowSize) {
       this.window.shift();
     }
   }

@@ -10,6 +10,7 @@ export class Settings implements ISettings {
   private _blockingRate = 0.8;
   private _modelActive = false;
   private _blockingActive = true;
+  private _finished = false;
   private _totalVisits = 10;
   private _currentTab: undefined | browser.Tabs.Tab;
   private _trainingList = [
@@ -57,6 +58,7 @@ export class Settings implements ISettings {
         this._blockingActive = value.blockingActive ? true : false;
         this._totalVisits = value.totalVisits;
         this._outputUrl = value.outputUrl;
+        this._finished = value.finished;
       });
     }, 400);
     // gets and stores current tab
@@ -100,5 +102,15 @@ export class Settings implements ISettings {
   }
   get totalVisits(): number {
     return this._totalVisits;
+  }
+  get outputUrl(): string {
+    return this._outputUrl;
+  }
+  get finished(): boolean {
+    return this._finished;
+  }
+  set finished(value: boolean) {
+    this._finished = value;
+    browser.storage.local.set({ finished: value });
   }
 }

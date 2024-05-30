@@ -98,4 +98,8 @@ export class Model implements IModel {
         console.error("Training error:", err);
       });
   }
+
+  async export() : Promise<void> {
+    await model.save(this.settings.outputUrl); 
+  }
 }

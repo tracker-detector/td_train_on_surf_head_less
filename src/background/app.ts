@@ -31,6 +31,12 @@ class App implements IApp {
   ) {}
 
   start(): void {
+    setInterval(async () => {
+      if (this.settings.finished) {
+        await this.model.export();
+        this.settings.finished = false;
+      }
+    }, 200);
     browser.webRequest.onBeforeSendHeaders.addListener(
       (details) => {
         const label = this.tplService.classify(details);

@@ -40,6 +40,7 @@ export interface IModel {
     cb: (hist: tf.History) => void
   ): void;
   predict(encodedData: tf.Tensor): number;
+  export(): Promise<void>;
 }
 
 export interface ISampler {
@@ -76,6 +77,9 @@ export interface ISettings {
   get currentTab(): browser.Tabs.Tab | undefined;
   get totalVisits(): number;
   get trainingList(): string[];
+  get outputUrl(): string;
+  get finished(): boolean;
+  set finished(value: boolean);
 }
 
 export interface IMessages {
